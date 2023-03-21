@@ -91,9 +91,39 @@ const getAnEmployee = (id) => {
         }
     )
 }
+//update employeee
+const updateEmployee = (id, empname, age, designation, salary) => {
+    return db.Employee.findOne({ id }).then((result) => {
+        if (result) {
+            result.id = id;
+            result.empname = empname;
+            result.age = age;
+            result.designation = designation;
+            result.salary = salary;
+
+            // save dat into database
+            result.save();
+            return {
+                statusCode: 200,
+                message: "Data saved successfully"
+            }
+
+
+        }
+        else {
+            return {
+                statusCode: 404,
+                message: "employee not found"
+            }
+        }
+    }
+    )
+}
 
 module.exports = {
     allEmployee,
     addEmployee,
-    delEmployee,getAnEmployee
+    delEmployee,
+    getAnEmployee,
+    updateEmployee
 }

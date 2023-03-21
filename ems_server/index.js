@@ -64,7 +64,18 @@ server.delete('/delemployee/:id',(req,res)=>{
 //api cal for get an employee details
 
 server.get('/getanemployee/:id',(req,res)=>{
-    logic.getAnEmployee(id.params.id).then(
+    logic.getAnEmployee(req.params.id).then(
+        (result)=>{
+            res.status(result.statusCode).json(result)
+        }
+    )
+    })
+
+
+    //api cal for update an employee details
+
+server.post('/updateemployee',(req,res)=>{
+    logic.updateEmployee(req.body.id,req.body.empname,req.body.age,req.body.designation,req.body.salary).then(
         (result)=>{
             res.status(result.statusCode).json(result)
         }
